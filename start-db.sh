@@ -16,6 +16,6 @@ docker run --rm -d --name $CONTAINER_NAME \
     -e MONGODB_INITDB_ROOT_PASSWORD=$ROOT_PASSWORD \
     -e KEY_VALUE_DB=$KEY_VALUE_DB \
     -e KEY_VALUE_USER=$KEY_VALUE_USER \
-    -e KEY_VALUE_PASSWOR=$KEY_VALUE_PASSWORD \
+    -e KEY_VALUE_PASSWORD=$KEY_VALUE_PASSWORD \
     -v ./db-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro \
     $MONGODB_IMAGE:$MONGODB_TAG
