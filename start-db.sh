@@ -12,12 +12,12 @@ KEY_VALUE_USER="key-value-user"
 KEY_VALUE_PASSWORD="key-value-password"
 
 # Conectivity
+source .env.network
 LOCALHOST_PORT=27017
 CONTAINER_PORT=27017
-NETWORK_NAME="key-value-net"
 
 # Storage(volume)
-VOLUME_NAME="key-value-data"
+source .env.volume
 VOLUME_CONTAINER_PATH="/data/db"
 
 docker run --rm -d --name $CONTAINER_NAME \
