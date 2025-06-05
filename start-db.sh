@@ -26,6 +26,7 @@ if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
     echo "A container with the name $CONTAINER_NAME already exists."
     echo "The container will be removed when stopped."
     echo "To stop the container, run: docker kill $CONTAINER_NAME"
+    exit 1
 fi
 
 docker run --rm -d --name $CONTAINER_NAME \
