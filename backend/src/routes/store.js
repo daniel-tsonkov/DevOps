@@ -63,23 +63,32 @@ keyValueRouter.put("/:key", async (req, res) => {
       return res.status(404).json({ error: "Key not found" });
     }
 
-    res
-      .status(200)
-      .json({ message: "Key-value pair updated successfuly", key, value });
+    res.status(200).json({
+      message: "Key-value pair updated successfuly",
+      key: keyValue.key,
+      value: keyValue.value,
+    });
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
-
-  return res.send("updating key-value pair");
 });
 
-keyValueRouter.delete("/:key", (req, res) => {
+keyValueRouter.delete("/:key", async (req, res) => {
+  const { key } = req.params;
+
   try {
+    const keyValue = await KeyValue.findOneAndDelete({ key });
+
+    if (!keyValue) {
+      return res.status(404).json({ error: "Key not found" });
+    }
+
+    res.status(200).json({
+      message: "Key-value pair deleted successfuly",
+    });
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
-
-  return res.send("deleting key-value pair");
 });
 
 module.exports = {
