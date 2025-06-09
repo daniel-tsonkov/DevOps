@@ -6,7 +6,7 @@ const port = process.env.PORT;
 const app = express();
 app.use(bodyParser.json());
 app.get("/health", (req, res) => {
-  res.status(200).send("up");
+  res.status(200).send("up...");
 });
 
 console.log("Connecting to DB");
@@ -23,7 +23,7 @@ mongoose
     app.listen(port, () => {
       console.log(`Listening on port ${port}`);
     });
-    console.log("Connected to db");
+    console.log("Connected to DB");
   })
   .catch((err) => {
     console.error("Something went wrong");
