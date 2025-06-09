@@ -1,21 +1,11 @@
-MONGODB_IMAGE="mongodb/mongodb-community-server"
-MONGODB_TAG="7.0-ubuntu2204"
 source .env.db
-
-# Root credentials
-ROOT_USER="root-user"
-ROOT_PASSWORD="root-password"
 
 # Conectivity
 source .env.network
-LOCALHOST_PORT=27017
-CONTAINER_PORT=27017
+LOCALHOST_PORT=3000
+CONTAINER_PORT=3000
 
-# Storage(volume)
-source .env.volume
-VOLUME_CONTAINER_PATH="/data/db"
-
-source setup.sh
+BACKEND_CONTAINER_NAME=backend
 
 if [ "$(docker ps -q -f name=$DB_CONTAINER_NAME)" ]; then
     echo "A container with the name $DB_CONTAINER_NAME already exists."
