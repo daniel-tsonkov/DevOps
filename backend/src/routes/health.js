@@ -1,8 +1,11 @@
-const express = require('express');
+const express = require("express");
 
-const keyValueRouter = express.Router();
+const healthRouter = express.Router();
 
-keyValueRouter.post('/store', (req, res) => {});
-keyValueRouter.get('/store/:key', (req, res) => {});
-keyValueRouter.put('/store/:key', (req, res) => {});
-keyValueRouter.delete('/store/:key', (req, res) => {});
+healthRouter.get("/", (req, res) => {
+  res.status(200).send("up...");
+});
+
+module.exports = {
+  healthRouter,
+};
