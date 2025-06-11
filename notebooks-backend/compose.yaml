@@ -9,11 +9,14 @@ services:
       - 3000:80
     environment:
       - PORT=80
+      - DB_URL=mongodb://<user>:<password>@notebooks-db/<db-name>
     develop:
       watch:
         - path: ./src
           action: sync
           target: /app/src
+    networks:
+      - notebooks-net
   notebooks-db:
     image: mongodb/mongodb-community-server:7.0-ubuntu2204
     env_file:
@@ -26,6 +29,11 @@ services:
         source: ./db-config/mongo-init.js
         target: /docker-entrypoint-initdb.d/mongo-init.js
         read_only: true
+    networks:
+      - notebooks-net
 
 volumes:
   notebooks-data:
+
+networks:
+  notebooks-net:
