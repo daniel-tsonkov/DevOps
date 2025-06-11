@@ -4,8 +4,7 @@ services:
   notes:
     build:
       context: .
-      dockerfile: Dockerfile
-      target: development
+      target: development #production
     ports:
       - 3001:80
     environment:
