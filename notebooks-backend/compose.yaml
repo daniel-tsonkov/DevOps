@@ -22,6 +22,10 @@ services:
       - type: volume
         source: notebooks-data
         target: /data/db
+      - type: bind
+        source: ./db-config/mongo-init.js
+        target: /docker-entrypoint-initdb.d/mongo-init.js
+        read_only: true
 
 volumes:
   notebooks-data:
