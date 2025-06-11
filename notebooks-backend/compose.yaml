@@ -14,3 +14,14 @@ services:
         - path: ./src
           action: sync
           target: /app/src
+  notebooks-db:
+    image: mongodb/mongodb-community-server:7.0-ubuntu2204
+    env_file:
+      - .env
+    volumes:
+      - type: volume
+        source: notebooks-data
+        target: /data/db
+
+volumes:
+  notebooks-data:
