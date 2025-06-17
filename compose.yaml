@@ -12,7 +12,7 @@ services:
     ports:
       - 8080:80
     networks:
-      - noter-app-net
+      - notes-app-net
     depends_on:
       - notebooks
       - notes
