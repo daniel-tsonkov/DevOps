@@ -11,6 +11,11 @@ services:
         target: /etc/nginx/nginx.conf
     ports:
       - 8080:80
+    networks:
+      - noter-app-net
     depends_on:
       - notebooks
       - notes
+
+networks:
+  notes-app-net:
