@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const { Notebook } = require("./models");
 
 const notebookRouter = express.Router();
@@ -36,8 +37,13 @@ notebookRouter.get("/", async (req, res) => {
 
 notebookRouter.get("/:id", async (req, res) => {
   try {
-    const notebooks = await Notebook.find();
-    return res.status(200).json({ data: notebooks });
+    const { id } = req.params;
+    const notebook = await Notebook.findById(id);
+
+    if (!notebook) {
+      return res.status(404).json({ error: "Notebook not found" });
+    }
+    return res.status(200).json({ data: notebook });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
