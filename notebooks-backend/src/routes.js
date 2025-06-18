@@ -24,8 +24,25 @@ notebookRouter.post("/", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-notebookRouter.get("/", async (req, res) => {});
-notebookRouter.get("/:id", async (req, res) => {});
+
+notebookRouter.get("/", async (req, res) => {
+  try {
+    const notebooks = await Notebook.find();
+    return res.status(200).json({ data: notebooks });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+notebookRouter.get("/:id", async (req, res) => {
+  try {
+    const notebooks = await Notebook.find();
+    return res.status(200).json({ data: notebooks });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 notebookRouter.put("/:id", async (req, res) => {});
 notebookRouter.delete("/:id", async (req, res) => {});
 
