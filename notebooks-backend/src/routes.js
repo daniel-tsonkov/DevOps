@@ -14,17 +14,15 @@ const validateId = (req, res, next) => {
   next();
 };
 
-const errorHandling = (erroer, req, res, next) => {
-    const { id } = req.params;
+// const errorHandling = (err, req, res, next) => {
+//     const { id } = req.params;
   
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: "Notebook not found" });
-    }
+//     if (!mongoose.Types.ObjectId.isValid(id)) {
+//       return res.status(404).json({ error: "Notebook not found" });
+//     }
   
-    next();
-  };
-
-const [ id ] = req.params;
+//     next();
+//   };
 
 notebookRouter.post("/", async (req, res) => {
   try {
