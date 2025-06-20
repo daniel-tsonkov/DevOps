@@ -16,15 +16,15 @@ const validateId = (req, res, next) => {
 
 noteRouter.post("/", async (req, res) => {
   try {
-    const { title, content, notebookId } = req.body;
+    const { title, content } = req.body;
 
     if (!title || content) {
       return res.status(400).json({ error: "'title', 'content' fields are required." });
     }
 
-    const notebook = new Notebook({ name, description });
-    await notebook.save();
-    res.status(201).json({ data: notebook });
+    const note = new Note({ title, content });
+    await note.save();
+    res.status(201).json({ data: note });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -32,8 +32,8 @@ noteRouter.post("/", async (req, res) => {
 
 noteRouter.get("/", async (req, res) => {
   try {
-    const notebooks = await Notebook.find();
-    return res.status(200).json({ data: notebooks });
+    const notes = await Note.find();
+    return res.status(200).json({ title, notes });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -41,13 +41,13 @@ noteRouter.get("/", async (req, res) => {
 
 noteRouter.get("/:id", validateId, async (req, res) => {
   try {
-    const notebook = await Notebook.findById(req.params.id);
+    const note = await Note.findById(req.params.id);
 
-    if (!notebook) {
-      return res.status(404).json({ error: "Notebook not found" });
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
     }
 
-    return res.status(200).json({ data: notebook });
+    return res.status(200).json({ data: note });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -55,19 +55,19 @@ noteRouter.get("/:id", validateId, async (req, res) => {
 
 noteRouter.put("/:id", validateId, async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { title, content } = req.body;
 
-    const notebook = await Notebook.findByIdAndUpdate(
+    const note = await Note.findByIdAndUpdate(
       req.params.id,
-      { name, description },
+      { title, content },
       { new: true }
     );
 
-    if (!notebook) {
-      return res.status(404).json({ error: "Notebook not found" });
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
     }
 
-    return res.json({ data: notebook });
+    return res.json({ data: note });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -75,10 +75,10 @@ noteRouter.put("/:id", validateId, async (req, res) => {
 
 noteRouter.delete("/:id", validateId, async (req, res) => {
   try {
-    const notebook = await Notebook.findByIdAndDelete(req.params.id);
+    const note = await Note.findByIdAndDelete(req.params.id);
 
-    if (!notebook) {
-      return res.status(404).json({ error: "Notebook not found" });
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
     }
 
     return res.sendStatus(204);
