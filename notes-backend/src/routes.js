@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const { Note } = require("./models");
 
+const noteboosApiUrl = process.env.NOTEBOOKS_API_URL;
 const noteRouter = express.Router();
 
 const validateId = (req, res, next) => {
@@ -21,13 +22,13 @@ noteRouter.post("/", async (req, res) => {
 
     if (notebookId) {
       try {
-        await axios.get(`http://reverse-proxy/api/notebooks/${notebookId}`);
+        await axios.get(`${noteboosApiUrl}/${notebookId}`);
       } catch (err) {
         console.error(err);
       }
     }
 
-    if (!title || !fcontent) {
+    if (!title || !content) {
       return res
         .status(400)
         .json({ error: "'title', 'content' fields are required." });
