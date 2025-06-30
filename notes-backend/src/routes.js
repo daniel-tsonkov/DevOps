@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const axios = require("axios");
 const { Note } = require("./models");
 
 const noteRouter = express.Router();
@@ -16,10 +17,20 @@ const validateId = (req, res, next) => {
 
 noteRouter.post("/", async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, notebookId } = req.body;
+
+    if (notebookId) {
+      try {
+        await axios.get(`http://reverse-proxy/api/notebooks/${notebookId}`);
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
     if (!title || !fcontent) {
-      return res.status(400).json({ error: "'title', 'content' fields are required." });
+      return res
+        .status(400)
+        .json({ error: "'title', 'content' fields are required." });
     }
 
     const note = new Note({ title, content });
