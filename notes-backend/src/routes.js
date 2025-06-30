@@ -18,7 +18,7 @@ noteRouter.post("/", async (req, res) => {
   try {
     const { title, content } = req.body;
 
-    if (!title || content) {
+    if (!title || !fcontent) {
       return res.status(400).json({ error: "'title', 'content' fields are required." });
     }
 
@@ -33,7 +33,7 @@ noteRouter.post("/", async (req, res) => {
 noteRouter.get("/", async (req, res) => {
   try {
     const notes = await Note.find();
-    return res.status(200).json({ title, notes });
+    return res.status(200).json({ data: notes });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
