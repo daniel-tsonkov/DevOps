@@ -20,9 +20,18 @@ noteRouter.post("/", async (req, res) => {
   try {
     const { title, content, notebookId } = req.body;
 
-    if (notebookId) {
+    let validateNotebookId = null;
+
+    if (!notebookId) {
+      console.info({
+        message: "Notebook ID not provided. Storing note wothout notebook.",
+      });
+    } else if (!mongoose.Types.ObjectId.isValid(notebookId)) {
+      return res.status(404).json({ error: "Notebook not found", notebookId });
+    } else {
       try {
         await axios.get(`${noteboosApiUrl}/${notebookId}`);
+        validateNotebookId = notebookId;
       } catch (err) {
         console.error(err);
       }
