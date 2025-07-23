@@ -1,0 +1,30 @@
+# Игнориране на node_modules
+node_modules/
+
+# Логове
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Кеш директории
+.cache/
+.temp/
+
+# Операционна система
+.DS_Store
+Thumbs.db
+
+# Среда
+.env
+.env.*.local
+
+# Изходни build файлове
+dist/
+build/
+
+# IDE файлове
+.vscode/
+.idea/
+*.swp
