@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: curl
   labels:
-    name: curl
+    app: curl
 spec:
   containers:
     - name: curl
