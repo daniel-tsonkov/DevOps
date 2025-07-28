@@ -3,6 +3,8 @@ kind: Kustomization
 
 namespace: dev
 
+namePrefix: dev
+nameSuffix: -alpha
+
 resources:
   - ../../base
-  - dev-ns.yaml
