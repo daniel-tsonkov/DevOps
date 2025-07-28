@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: curl
+  name: curl2
   labels:
-    app: curltier
-    tier: frontend
+    app: curl2
+    tier: backend
 spec:
   containers:
-    - name: curl
+    - name: curl2
       image: lmacademy/alpine-curl:1.0.0
       resources:
         limits:
