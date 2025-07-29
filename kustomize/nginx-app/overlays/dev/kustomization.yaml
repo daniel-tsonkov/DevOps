@@ -6,11 +6,16 @@ kind: Kustomization
 namePrefix: dev
 nameSuffix: -alpha
 
-commonLabels:
-  team: fina
-  project: ecomerce-app
-  tier: backend
-  env: dev
+labels:
+  - pairs:
+      project: ecomerce-app
+      tier: backend
+      env: dev
+
+commonAnnotations:
+  team: finance
+  maintainer: "finance@ourcompany.org"
+  repository: "git-repo"
 
 resources:
   - ../../base
