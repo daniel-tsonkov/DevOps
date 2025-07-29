@@ -36,3 +36,12 @@ configMapGenerator:
       - some_other_feature=true
     options:
       disableNameSuffixHash: true
+  - name: db-init-config
+    files:
+      - db-init.js
+
+secretGenerator:
+  - name: local-config
+    envs:
+      - .env.local
+    type: Opaque
