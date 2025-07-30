@@ -44,4 +44,5 @@ secretGenerator:
 
 patches:
   - path: update-resources.patch.yaml
-  - path: use-latest-tag-patch.yaml
+  - path: use-latest-tag.patch.yaml
+  - path: mount-db-init.patch.yaml
